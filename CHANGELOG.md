@@ -5,6 +5,16 @@ Each version has a tag and a GitHub release with the same notes.
 
 ## Unreleased
 
+## 0.3.0 (2026-10-23)
+
+Moves session status into a persistent sidebar, and makes each extension its own package.
+
+- `session-status` shows its status in a persistent, resizable right sidebar instead of a centered popup, and answers no longer close it. [#3](https://github.com/yahyabedirhan/pi-packages/pull/3)
+- `session-status` and `subagent-guard` are now independent packages in `packages/`, each installed from its own directory. The repository root is no longer a Pi package, so an install of the root needs the migration in the README. [#4](https://github.com/yahyabedirhan/pi-packages/pull/4)
+- Shift+Left and Shift+Right resize the focused sidebar, next to `<`, `>` and the width command. [#5](https://github.com/yahyabedirhan/pi-packages/pull/5)
+- The sidebar's controls follow its left edge: Shift+Left widens it and Shift+Right narrows it. It now opens 64 columns wide, starts with its state, and the compact widget has a rounded border. [#6](https://github.com/yahyabedirhan/pi-packages/pull/6)
+- `/session-status` takes explicit subcommands: `sidebar show`, `sidebar hide`, `sidebar focus`, `sidebar width N`, `widget show` and `widget hide`. The flat arguments are gone, while `/session-status` alone still toggles the sidebar and `reset` still clears the status. [#6](https://github.com/yahyabedirhan/pi-packages/pull/6)
+
 ## 0.2.0 (2026-10-10)
 
 Adds the `subagent-guard` extension, next to `session-status`.
