@@ -11,8 +11,10 @@ When this page and the shared rules disagree, follow this page, and the next `/s
 
 A release here versions the whole repository, not a single package.
 The repository holds independent Pi packages, and one version, one tag and one GitHub release cover all of them at once.
-The project publishes to GitHub only, so people install a release from a clone checked out at its tag, as the [README](../../README.md) explains.
-Nothing goes to npm or any other registry yet.
+Releases go to GitHub only, and nothing is published to npm or any other registry.
+People install a release from a clone checked out at its tag, as the [README](../../README.md) explains.
+Adding a registry is a future decision for the maintainer.
+That decision would add a publish step after step 3 under the shared npm rules, where the agent prepares the publish and the maintainer runs `npm login` and `npm publish` with their two-factor code.
 
 ## Version files
 
@@ -75,26 +77,3 @@ A new extension counts as a new feature, as it did for `0.2.0`, which added `sub
 
 - The agent runs these steps: choosing the version, writing the changelog, opening the release pull request, tagging, making the GitHub release and running the checks.
 - The maintainer runs these steps: approving the version and the merge.
-
-## Gaps
-
-These parts of the release lifecycle are not settled yet, and each one names where it shows.
-
-- **No changelog yet.**
-  The repository has no `CHANGELOG.md`, and the notes of `v0.1.0` and `v0.2.0` live only in their GitHub releases.
-  The shared release rules expect a changelog, so the next release pull request creates `CHANGELOG.md`, with the notes of both releases as its first two sections, before it adds the new version.
-  Until then, the changelog read in step 0 prints nothing.
-- **Four merged pull requests since `v0.2.0`.**
-  Pull requests #3 to #6 merged after the `v0.2.0` tag, and no version covers them yet.
-  They add the session status sidebar, split the extensions into independent packages, add the sidebar resize keys and align the sidebar controls with its edge.
-  Source: `git log --first-parent v0.2.0..origin/main`.
-- **The version bump rode in a feature commit before.**
-  For `0.2.0`, the commit `document and list subagent-guard` raised the version inside the feature's own pull request.
-  This page follows the shared rule of one release pull request for the version and the changelog instead.
-- **GitHub releases came after the tags.**
-  The tags `v0.1.0` and `v0.2.0` date from 2026-10-10, and their GitHub releases from 2026-10-23.
-  From now on, step 3 makes the tag and the release together.
-- **Registry publication is undecided.**
-  The [README](../../README.md) says that registry names, release versions and publication need a separate decision.
-  When the maintainer approves npm publishing, this page gains a publish step after step 3, with the shared npm rules: the agent prepares the publish workspace, and the maintainer runs `npm login` and `npm publish` with their two-factor code.
-  That decision also settles whether each package gets its own version, which changes the version files, the tag names and the release titles above.
