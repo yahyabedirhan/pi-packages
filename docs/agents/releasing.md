@@ -18,9 +18,10 @@ That decision would add a publish step after step 3 under the shared npm rules, 
 
 ## Version files
 
-A release sets the new version in this file:
+A release sets the new version in these files:
 
 - `package.json` at the repository root holds the version in its `"version"` field.
+- `package-lock.json` holds the same version in its top `"version"` field and in the `"version"` field of its `""` entry under `"packages"`.
 
 The packages in `packages/<name>/package.json` keep the version `0.0.0`, and a release does not change them.
 That version and their `-local` names are private placeholders until publication is approved, as the [README](../../README.md) says.
@@ -43,7 +44,7 @@ Every release runs these steps in this order, so that each version has its tag a
 1. Open one pull request that sets the new version and the changelog.
    List the commits since the last tag with `git log $(git describe --tags --abbrev=0)..origin/main --oneline`, and choose the version from them by the version rule below.
    Tell the maintainer the version before anything else, so they can stop the release.
-   Set it in `package.json`, and rename `## Unreleased` in `CHANGELOG.md` to `## <version> (<YYYY-MM-DD>)`.
+   Set it in `package.json` and `package-lock.json`, and rename `## Unreleased` in `CHANGELOG.md` to `## <version> (<YYYY-MM-DD>)`.
    Run `npm test`, `npm run check` and `npm run test:packages` before the commit, as `AGENTS.md` asks for every commit.
 2. Merge the pull request once the maintainer approves it.
 3. Tag the merged commit as `v<version>`, and make a GitHub release for that tag.
@@ -54,7 +55,7 @@ Every release runs these steps in this order, so that each version has its tag a
 4. Check the release by running the reads from step 0 again.
    Each read names the new version.
 
-A version is complete when the changelog, `package.json`, the tag and the latest GitHub release all name it.
+A version is complete when the changelog, both version files, the tag and the latest GitHub release all name it.
 A release ends at step 4, not at the merge.
 
 ## Version rule
