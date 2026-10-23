@@ -24,3 +24,8 @@ The five default labels, each named after its role. See `docs/agents/triage-labe
 ### Domain docs
 
 Single-context. See `docs/agents/domain.md`.
+
+### Releases
+
+One version in the root `package.json` covers every package, and releases publish to GitHub only.
+Before a release, and after merging a version bump, follow `docs/agents/releasing.md`.
